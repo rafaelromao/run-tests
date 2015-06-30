@@ -2,7 +2,7 @@
 Write-Host ""
 Write-Host "NUnit test discovery and execution utility for Powershell"
 Write-Host ""
-Write-Host "http://github.com/rafaelromao/run-tests"
+Write-Host "https://github.com/rafaelromao/run-tests"
 Write-Host ""
 
 # Parse the input arguments
@@ -25,7 +25,7 @@ Function ParseArguments($input_args) {
 			$nextArg = $input_args[$i+1]
 		}
 
-		# Check if shall run all tests automatically
+		# Check if shall print help
 		if ($arg -eq "--help" -or $arg -eq "-h") {
 			$result.printHelp = $true
 		}
