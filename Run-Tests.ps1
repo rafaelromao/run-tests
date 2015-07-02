@@ -109,10 +109,11 @@ Function FindTestAssemblies($solutionDir, $config) {
 
 # Runs a given test assembly
 Function RunTestAssembly($testAssembly, $counter, $config, $nunitOverMono, $nunitIncludes, $nunitExcludes) {
-	$nunitConsole = "${env:ProgramFiles(x86)}\NUnit 2.6.4\bin\nunit-console.exe"
-	$nunitArgs = "--noshadow --labels"
+	#$nunitConsole = "${env:ProgramFiles(x86)}\NUnit 2.6.4\bin\nunit-console.exe"
+	$nunitConsole = "${env:ProgramFiles(x86)}\NUnit.org\bin\nunit-console.exe"
+	$nunitArgs = "--labels=all"
 	$tmp = mkdir -Force Run-Tests
-	$outputs = "--out=Run-Tests/Run-Tests_$($counter).out --err=Run-Tests/Run-Tests_$($counter).err"
+	$outputs = "--out=Run-Tests\Run-Tests_$($counter).out --err=Run-Tests\Run-Tests_$($counter).err"
 	$arguments = "$($nunitArgs) --config=$($config) $($outputs)"
 	if ($nunitIncludes -ne $null) {
 		$arguments = "$($arguments) --include=$($nunitIncludes)"
@@ -121,8 +122,9 @@ Function RunTestAssembly($testAssembly, $counter, $config, $nunitOverMono, $nuni
 		$arguments = "$($arguments) --exclude=$($nunitExcludes)"
 	}
 	if ($nunitOverMono) {
-		Write-Host -foregroundcolor Yellow "Executing mono $($nunitConsole) ""$($testAssembly)"" $($arguments)"
-		& mono "$($nunitConsole)" """$($testAssembly)"" $($arguments)"
+		Write-Host -foregroundcolor Yellow "Executing mono $($nunitConsole) ""$($testAssembly)"" --framework=mono-4.0 $($arguments)"
+		& mono "$($nunitConsole)" """$($testAssembly)"" --framework=mono-4.0 $($arguments)"
+		#& $nunitConsole """$($testAssembly)"" --framework=mono-4.0 $($arguments)"
 	}
 	else {
 		Write-Host -foregroundcolor Yellow "Executing $($nunitConsole) ""$($testAssembly)"" $($arguments)"
