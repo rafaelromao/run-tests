@@ -2,7 +2,7 @@
 NUnit test discovery and execution utility for Powershell
 
 ## How to use it?
-From a Visual Studio solution folder, just type `run-tests` to discover and execute all tests whithin this solution.
+From a Visual Studio solution folder, just type `run-tests` to discover and execute all tests within this solution.
 
 Any project whose name ends with `.Tests.csproj` will be considered a test project.
 
